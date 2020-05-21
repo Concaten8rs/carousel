@@ -18,13 +18,29 @@
 **Returns:** JSON
 
 ```json
-    {
-      "id": "Number",
-      "imageURL": "image URL",
-      "description": "String",
-      "posted": "YYYY-MM-MM",
-      "item": "id Number"
-    }
+    [
+      {
+        "id": "Number",
+        "imageURL": "image URL",
+        "description": "String",
+        "posted": "YYYY-MM-MM",
+        "item": "id Number"
+      },
+      {
+        "id": "Number",
+        "imageURL": "image URL",
+        "description": "String",
+        "posted": "YYYY-MM-MM",
+        "item": "id Number"
+      },
+      {
+        "id": "Number",
+        "imageURL": "image URL",
+        "description": "String",
+        "posted": "YYYY-MM-MM",
+        "item": "id Number"
+      }
+    ]
 ```
 
 ### Add photo to item
@@ -38,7 +54,7 @@
 **Request Body**: Expects JSON with the following keys.
 
 ```json
-      {
+    {
       "imageURL": "image URL",
       "description": "String",
       "posted": "YYYY-MM-MM",
@@ -58,7 +74,7 @@
 **Request Body**: Expects JSON with any of the following keys (include only keys to be updated)
 
 ```json
-   {
+    {
       "id": "Number",
       "imageURL": "image URL",
       "description": "String",
