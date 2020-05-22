@@ -4,8 +4,8 @@
 ### All API routes
   * GET `/api/items/:id/photos`
   * POST `/api/items/:id/photos`
-  * DELETE `/api/items/:id/photos/:photo_id`
   * PUT `/api/items/:id/photos/:photo_id`
+  * DELETE `/api/items/:id/photos/:photo_id`
 
 ### Get all photos for item
   * GET `/api/items/:id/photos`
@@ -21,24 +21,24 @@
     [
       {
         "id": "Number",
-        "imageURL": "image URL",
-        "description": "String",
-        "posted": "YYYY-MM-MM",
-        "item": "id Number"
+        "photo_description": "String",
+        "photo_url": "URL",
+        "posting_date": "Date",
+        "photo_product_id": "Number"
       },
       {
         "id": "Number",
-        "imageURL": "image URL",
-        "description": "String",
-        "posted": "YYYY-MM-MM",
-        "item": "id Number"
+        "photo_description": "String",
+        "photo_url": "URL",
+        "posting_date": "Date",
+        "photo_product_id": "Number"
       },
       {
         "id": "Number",
-        "imageURL": "image URL",
-        "description": "String",
-        "posted": "YYYY-MM-MM",
-        "item": "id Number"
+        "photo_description": "String",
+        "photo_url": "URL",
+        "posting_date": "Date",
+        "photo_product_id": "Number"
       }
     ]
 ```
@@ -55,10 +55,10 @@
 
 ```json
     {
-      "imageURL": "image URL",
-      "description": "String",
-      "posted": "YYYY-MM-MM",
-      "item": "id Number"
+      "photo_description": "String",
+      "photo_url": "URL",
+      "posting_date": "Date",
+      "photo_product_id": "Number"
     }
 ```
 
@@ -76,9 +76,10 @@
 ```json
     {
       "id": "Number",
-      "imageURL": "image URL",
-      "description": "String",
-      "posted": "YYYY-MM-MM"
+      "photo_description": "String",
+      "photo_url": "URL",
+      "posting_date": "Date",
+      "photo_product_id": "Number",
     }
 ```
 
@@ -90,24 +91,3 @@
   * `photo_id` photo id
 
 **Success Status Code:** `204`
-
-### Add photo to item
-  * POST `/api/items/:id/photos`
-
-**Path Parameters:**
-
-  * `id` item id
-
-**Success Status Code:** `201`
-
-**Request Body**: Expects JSON with the following keys.
-
-```json
-    {
-      "image": "image URL",
-      "description": "String",
-      "posted": "YYYY-MM-MM",
-      "category": "String",
-      "item": "id Number"
-    }
-```
