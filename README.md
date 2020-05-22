@@ -21,24 +21,24 @@
     [
       {
         "id": "Number",
-        "imageURL": "image URL",
-        "description": "String",
-        "posted": "YYYY-MM-MM",
-        "item": "id Number"
+        "photo_description": "String",
+        "photo_url": "URL",
+        "posting_date": "Date",
+        "photo_product_id": "Number"
       },
       {
         "id": "Number",
-        "imageURL": "image URL",
-        "description": "String",
-        "posted": "YYYY-MM-MM",
-        "item": "id Number"
+        "photo_description": "String",
+        "photo_url": "URL",
+        "posting_date": "Date",
+        "photo_product_id": "Number"
       },
       {
         "id": "Number",
-        "imageURL": "image URL",
-        "description": "String",
-        "posted": "YYYY-MM-MM",
-        "item": "id Number"
+        "photo_description": "String",
+        "photo_url": "URL",
+        "posting_date": "Date",
+        "photo_product_id": "Number"
       }
     ]
 ```
@@ -55,10 +55,10 @@
 
 ```json
     {
-      "imageURL": "image URL",
-      "description": "String",
-      "posted": "YYYY-MM-MM",
-      "item": "id Number"
+      "photo_description": "String",
+      "photo_url": "URL",
+      "posting_date": "Date",
+      "photo_product_id": "Number"
     }
 ```
 
@@ -76,10 +76,10 @@
 ```json
     {
       "id": "Number",
-      "photo_id": "Number",
-      "imageURL": "image URL",
-      "description": "String",
-      "posted": "YYYY-MM-MM"
+      "photo_description": "String",
+      "photo_url": "URL",
+      "posting_date": "Date",
+      "photo_product_id": "Number",
     }
 ```
 
