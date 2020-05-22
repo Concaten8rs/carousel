@@ -25,12 +25,12 @@ CREATE TABLE products_photos (
 
 -- add back foreign keys
 ALTER TABLE photos
-  FOREIGN KEY(product_id) REFERENCES products(id)
+  FOREIGN KEY(product_id) REFERENCES products(id);
 
 ALTER TABLE products_photos
-  FOREIGN KEY(products_id) REFERENCES products(id)
+  FOREIGN KEY(products_id) REFERENCES products(id);
 
 ALTER TABLE products_photos
-  FOREIGN KEY(photos_id) REFERENCES photos(id)
+  FOREIGN KEY(photos_id) REFERENCES photos(id);
 
 
