@@ -2,7 +2,7 @@
 
 ## Server API
 ### All API routes
-  * GET `/api/products/:id/photos`
+  * GET `/api/products/:id`
   * POST `/api/products/:id/photos`
   * POST `/api/products`
   * PUT `/api/products/:id/photos/:photo_id`
