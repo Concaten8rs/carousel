@@ -3,22 +3,33 @@ CREATE KEYSPACE carousel WITH replication = {'class': 'SimpleStrategy', 'replica
 
 USE carousel;
 
-DROP TABLE IF EXISTS carousel.products;
+DROP TABLE IF EXISTS carousel.products; -- getting products
 CREATE TABLE carousel.products (
-  id INT PRIMARY KEY,
+  product_id INT,
   product_name TEXT,
   product_description DATE,
-  cost INT
+  cost INT,
+  PRIMARY KEY (product_id)
 );
 
-DROP TABLE IF EXISTS carousel.photos;
+DROP TABLE IF EXISTS carousel.photos; -- deleting, creating, and updating
 CREATE carousel.photos (
-  id INT PRIMARY KEY,
+  photo_id INT,
+  photo_order INT,
   photo_description TEXT,
   photo_url TEXT,
   posting_date DATE,
-  photo_product_id INT
-)
+  PRIMARY KEY (photo_id)
+);
 
-CREATE INDEX index_photo_product_id ON carousel.photos (photo_product_id);
+DROP TABLE IF EXISTS carousel.photos_by_product; -- getting photos
+CREATE carousel.photos (
+  photo_id INT,
+  product_id INT,
+  photo_order INT,
+  photo_description TEXT,
+  photo_url TEXT,
+  posting_date DATE,
+  PRIMARY KEY (product_id, photo_order)
+) WITH CLUSTERING ORDER BY (photo_order DESC)
 

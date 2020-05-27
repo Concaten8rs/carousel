@@ -10,12 +10,11 @@ const {
   MONGO_PORT,
 } = process.env;
 
-const dbConnectUrl = { LOCALURL: `mongodb://${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DB}` };
+// const dbConnectUrl = { LOCALURL: `mongodb://${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DB}` };
 
+mongoose.connect("mongodb://localhost/fec", {useNewUrlParser: true})
 
-// mongoose.connect("mongodb://localhost/fec", {useNewUrlParser: true})
-
-mongoose.connect(dbConnectUrl.LOCALURL);
+// mongoose.connect(dbConnectUrl.LOCALURL);
 
 // have productModel schema
 let connection = mongoose.connection;
