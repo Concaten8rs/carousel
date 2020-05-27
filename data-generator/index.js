@@ -27,20 +27,46 @@ const generateDate = () => {
 }
 
 // helper function to produce random photo
-const generatePhotoUrl = () => {d
+const generatePhotoUrl = () => {
   let photoId = randomNumGenerator(1, 1000);
   let photoUrl = `https://hrsf127-sdc.s3-us-west-1.amazonaws.com/Carousel+Photos/photo${photoId}.jpg`;
   return photoUrl;
 }
 
+// const generatePhotos = () => { // heap error writing 40mm records
+//   console.log('generatePhotos');
+//   let stream = fs.createWriteStream('data-generator/photosData.csv');
+
+//   for (let i = 1; i < 30000001; i++) {
+//     stream.write(`${i},${randomNumGenerator(1, 10000001)}, ${faker.lorem.sentence()}, ${randomNumGenerator(1, 10)}, ${generatePhotoUrl()}, ${generateDate()}\n`);
+//   }
+//   stream.end();
+// }
+
+const createString = (i) => {
+  return `${i},${randomNumGenerator(1, 10000001)}, ${faker.lorem.sentence()}, ${randomNumGenerator(1, 10)}, ${generatePhotoUrl()}, ${generateDate()}\n`
+}
+
+const writer = fs.createWriteStream('data-generator/photosData.csv');
+
 const generatePhotos = () => {
   console.log('generatePhotos');
-  let stream = fs.createWriteStream('data-generator/photosData.csv');
-
-  for (let i = 1; i < 30000001; i++) {
-    stream.write(`${i},${randomNumGenerator(1, 10000001)}, ${faker.lorem.sentence()}, ${randomNumGenerator(1, 10)}, ${generatePhotoUrl()}, ${generateDate()}\n`);
+  let i = 90000000;
+  write();
+  function write() {
+    let ok = true;
+    do {
+      i--;
+      if (i === 0) {
+        writer.write(createString(i), 'utf-8');
+      } else {
+        ok = writer.write(createString(i), 'utf-8');
+      }
+    } while (i > 0 && ok);
+    if (i > 0) {
+      writer.once('drain', write);
+    }
   }
-  stream.end();
 }
 
 const generateProducts = () => {
