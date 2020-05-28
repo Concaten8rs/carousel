@@ -1,13 +1,13 @@
--- DROP DATABASE IF EXISTS carousel;
--- CREATE DATABASE carousel;
+DROP DATABASE IF EXISTS carousel;
+CREATE DATABASE carousel;
 
--- \c carousel;
+\c carousel;
 
 CREATE TABLE products (
   id SERIAL PRIMARY KEY,
   product_name TEXT NOT NULL,
   product_description TEXT NOT NULL,
-  cost INT NOT NULL
+  cost NUMERIC NOT NULL
 );
 
 CREATE TABLE photos (
@@ -20,8 +20,8 @@ CREATE TABLE photos (
 );
 
 -- add back foreign keys
--- ALTER TABLE photos
---   ADD FOREIGN KEY(product_id) REFERENCES products(id);
+ALTER TABLE photos
+  ADD FOREIGN KEY(product_id) REFERENCES products(id);
 
 COPY products (id, product_name, product_description, cost) FROM '/Users/serviolee/Documents/nextchapter/hrsf127-sdc/carousel/data-generator/productsData.csv' DELIMITER ',' CSV;
 
