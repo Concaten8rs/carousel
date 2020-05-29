@@ -14,16 +14,14 @@ const appendLeading = (val) => {
 }
 
 const generateDate = () => {
-  var arr = [];
-  var year = randomNumGenerator(2008, 2019);
-  var month = randomNumGenerator(1,12);
-  var day = randomNumGenerator(1,28);
+  let year = randomNumGenerator(2008, 2019);
+  let month = randomNumGenerator(1,12);
+  let day = randomNumGenerator(1,28);
 
-  var date = `${year}-${appendLeading(month)}-${appendLeading(day)}`;
+  let date = `${year}-${appendLeading(month)}-${appendLeading(day)}`;
+  // let date = year+'-'+appendLeading(month)+'-'+appendLeading(day);
 
-  arr.push(date);
-
-  return arr;
+  return date;
 }
 
 // helper function to produce random photo
@@ -33,31 +31,33 @@ const generatePhotoUrl = () => {
   return photoUrl;
 }
 
-// const generatePhotos = () => { // heap error writing 40mm records
-//   console.log('generatePhotos');
-//   let stream = fs.createWriteStream('data-generator/photosData.csv');
+// const writer = fs.createWriteStream('data-generator/photosData.csv');
 
-//   for (let i = 1; i < 30000001; i++) {
-//     stream.write(`${i},${randomNumGenerator(1, 10000001)}, ${faker.lorem.sentence()}, ${randomNumGenerator(1, 10)}, ${generatePhotoUrl()}, ${generateDate()}\n`);
-//   }
-//   stream.end();
+// const createString = (i) => {
+//   return `${i},${randomNumGenerator(1, 10000001)},${faker.lorem.sentence()},${randomNumGenerator(1, 10)},${generatePhotoUrl()},${generateDate()}\n`
 // }
 
+const writer = fs.createWriteStream('data-generator/cassandraPhotosData.csv'); // create data for Cassandra photos table
+
 const createString = (i) => {
-  return `${i},${randomNumGenerator(1, 10000001)}, ${faker.lorem.sentence()}, ${randomNumGenerator(1, 10)}, ${generatePhotoUrl()}, ${generateDate()}\n`
+    return `${i},${faker.lorem.sentence()},${randomNumGenerator(1, 10)},${generatePhotoUrl()},${generateDate()}\n`
 }
 
-const writer = fs.createWriteStream('data-generator/photosData.csv');
+// const writer = fs.createWriteStream('data-generator/cassandraPhotosByProductData.csv'); // create data for Cassandra photos_by_product table
+
+// const createString = (i) => {
+//   return `${randomNumGenerator(1, 10000001)},${randomNumGenerator(1, 10)},${faker.lorem.sentence()},${i},${generatePhotoUrl()},${generateDate()}\n`
+// }
 
 const generatePhotos = () => {
   console.log('generatePhotos');
-  let i = 90000000;
+  let i = 90000001;
   write();
   function write() {
     let ok = true;
     do {
       i--;
-      if (i === 0) {
+      if (i === 1) {
         writer.write(createString(i), 'utf-8');
       } else {
         ok = writer.write(createString(i), 'utf-8');
