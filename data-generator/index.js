@@ -5,6 +5,7 @@ const randomNumGenerator = (min, max) => {
   return Math.floor(Math.random() * (max - min) + min);
 }
 
+// helper function to format date and month
 const appendLeading = (val) => {
   if (val < 10) {
     return `0${val}`;
@@ -13,34 +14,63 @@ const appendLeading = (val) => {
   }
 }
 
+// helper function to produce random date
 const generateDate = () => {
-  var arr = [];
-  var year = randomNumGenerator(2008, 2019);
-  var month = randomNumGenerator(1,12);
-  var day = randomNumGenerator(1,28);
+  let year = randomNumGenerator(2008, 2019);
+  let month = randomNumGenerator(1,12);
+  let day = randomNumGenerator(1,28);
 
-  var date = `${year}-${appendLeading(month)}-${appendLeading(day)}`;
+  let date = `${year}-${appendLeading(month)}-${appendLeading(day)}`;
 
-  arr.push(date);
-
-  return arr;
+  return date;
 }
 
 // helper function to produce random photo
-const generatePhotoUrl = () => {d
+const generatePhotoUrl = () => {
   let photoId = randomNumGenerator(1, 1000);
   let photoUrl = `https://hrsf127-sdc.s3-us-west-1.amazonaws.com/Carousel+Photos/photo${photoId}.jpg`;
   return photoUrl;
 }
 
+const writer = fs.createWriteStream('data-generator/photosData.csv');
+
+const createString = (i) => {
+  return `${i},${randomNumGenerator(1, 10000001)},${faker.lorem.sentence()},${randomNumGenerator(1, 10)},${generatePhotoUrl()},${generateDate()}\n`
+}
+
+/* below are commands to create data for Cassandra tables
+
+const writer = fs.createWriteStream('data-generator/cassandraPhotosData.csv'); // create data for Cassandra photos table
+
+const createString = (i) => {
+    return `${i},${faker.lorem.sentence()},${randomNumGenerator(1, 10)},${generatePhotoUrl()},${generateDate()}\n`
+}
+
+const writer = fs.createWriteStream('data-generator/cassandraPhotosByProductData.csv'); // create data for Cassandra photos_by_product table
+
+const createString = (i) => {
+  return `${randomNumGenerator(1, 10000001)},${randomNumGenerator(1, 10)},${faker.lorem.sentence()},${i},${generatePhotoUrl()},${generateDate()}\n`
+}
+*/
+
 const generatePhotos = () => {
   console.log('generatePhotos');
-  let stream = fs.createWriteStream('data-generator/photosData.csv');
-
-  for (let i = 1; i < 30000001; i++) {
-    stream.write(`${i},${randomNumGenerator(1, 10000001)}, ${faker.lorem.sentence()}, ${randomNumGenerator(1, 10)}, ${generatePhotoUrl()}, ${generateDate()}\n`);
+  let i = 90000001;
+  write();
+  function write() {
+    let ok = true;
+    do {
+      i--;
+      if (i === 1) {
+        writer.write(createString(i), 'utf-8');
+      } else {
+        ok = writer.write(createString(i), 'utf-8');
+      }
+    } while (i > 0 && ok);
+    if (i > 0) {
+      writer.once('drain', write);
+    }
   }
-  stream.end();
 }
 
 const generateProducts = () => {
@@ -54,4 +84,4 @@ const generateProducts = () => {
 }
 
 generatePhotos();
-// generateProducts();
+generateProducts();
