@@ -24,8 +24,7 @@ CREATE TABLE carousel.photos (
   PRIMARY KEY (photo_id)
 );
 
-COPY carousel.photos (photo_id, photo_description, photo_order, photo_url, posting_date) FROM '/Users/serviolee/Documents/nextchapter/hrsf127-sdc/carousel/data-generator/cassandraPhotosData.csv' WITH DELIMITER=',';
-
+-- alternative method to copying into database - need to run cmd in /cassandar/build
 ./cassandra-loader -f /Users/serviolee/documents/nextchapter/hrsf127-sdc/carousel/data-generator/cassandraPhotosData.csv -host 127.0.0.1 -schema "carousel.photos(photo_id, photo_description, photo_order, photo_url, posting_date)";
 
 DROP TABLE IF EXISTS carousel.photos_by_product; -- getting photos
@@ -39,8 +38,8 @@ CREATE TABLE carousel.photos_by_product (
   PRIMARY KEY (product_id, photo_order)
 ) WITH CLUSTERING ORDER BY (photo_order DESC);
 
-
-COPY carousel.photos_by_product (product_id, photo_order, photo_description, photo_id, photo_url, posting_date) FROM '/Users/serviolee/Documents/nextchapter/hrsf127-sdc/carousel/data-generator/cassandraPhotosByProductData.csv' WITH DELIMITER=',';
+-- alternative method to copying into database - need to run cmd in /cassandar/build
+./cassandra-loader -f /Users/serviolee/documents/nextchapter/hrsf127-sdc/carousel/data-generator/cassandraPhotosByProductData.csv -host 127.0.0.1 -schema "carousel.photos_by_product(product_id, photo_order, photo_description, photo_id, photo_url, posting_date)";
 
 -- test insert
 INSERT INTO carousel.photos (photo_id, photo_description, photo_order, photo_url, posting_date) VALUES (23, Repellendus quo consequatur aut est voluptatem aliquid impedit laborum id., 7, https://hrsf127-sdc.s3-us-west-1.amazonaws.com/Carousel+Photos/photo3.jpg, '2009-05-24');
