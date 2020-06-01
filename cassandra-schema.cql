@@ -42,4 +42,12 @@ CREATE TABLE carousel.photos_by_product (
 ./cassandra-loader -f /Users/serviolee/documents/nextchapter/hrsf127-sdc/carousel/data-generator/cassandraPhotosByProductData.csv -host 127.0.0.1 -schema "carousel.photos_by_product(product_id, photo_order, photo_description, photo_id, photo_url, posting_date)";
 
 -- test insert
-INSERT INTO carousel.photos (photo_id, photo_description, photo_order, photo_url, posting_date) VALUES (23, Repellendus quo consequatur aut est voluptatem aliquid impedit laborum id., 7, https://hrsf127-sdc.s3-us-west-1.amazonaws.com/Carousel+Photos/photo3.jpg, '2009-05-24');
+INSERT INTO carousel.photos (photo_id, photo_description, photo_order, photo_url, posting_date) VALUES (90000002,Repellendus quo consequatur aut est voluptatem aliquid impedit laborum id.,7,https://hrsf127-sdc.s3-us-west-1.amazonaws.com/Carousel+Photos/photo3.jpg,'2009-05-24');
+
+INSERT INTO carousel.photos (photo_id, photo_description, photo_order, photo_url, posting_date) VALUES (90000004,'Voluptatem et impedit harum quos sed.',5,'https://hrsf127-sdc.s3-us-west-1.amazonaws.com/Carousel+Photos/photo281.jpg','2008-06-26');
+
+-- test delete
+DELETE FROM carousel.photos WHERE photo_id=90000004;
+
+-- test post
+UPDATE carousel.photos SET photo_order=0 WHERE photo_id=90000000;
