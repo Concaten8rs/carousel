@@ -10,7 +10,7 @@ exports.config = {
   /**
    * Array of application names.
    */
-  app_name: ['SDC-carousell'],
+  app_name: ['SDC2020-carousel'],
   /**
    * Your New Relic license key.
    */

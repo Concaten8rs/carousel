@@ -1,7 +1,8 @@
 
+const nr = require('newrelic');
 const express = require('express');
 const bodyParser = require('body-parser');
-const controllers = require('./controllers.js')
+const controllers = require('./controllers.js');
 const cors = require('cors');
 const morgan = require('morgan');
 const path = require('path');

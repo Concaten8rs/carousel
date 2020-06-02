@@ -4,3 +4,4 @@ client/dist/style.css
 todo.txt
 *.csv
 NEW_RELIC_KEY.js
+newrelic_agent.log
