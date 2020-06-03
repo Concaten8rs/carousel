@@ -12,26 +12,20 @@ class CaroApp extends React.Component {
         this.state = {
             product : {},
             displayedImageObj : {}
-        };
-    }
-
-    stateUpdater(callback) {
-        axios.get("http://127.0.0.1:3000/caro/fetch")
-        .then(res => {
-            // console.log(res.data[0])
-            callback(null, res.data);
-        })
-        .catch(err => {callback(err)})
+        }
     }
 
     componentDidMount() {
-        this.stateUpdater((err, data) => {
-            if (err) throw "Error : " + err;
-            this.setState({
-                product : data[0],
-                displayedImageObj : data[0].photos[0]
-            })
-        })
+        axios.get('/api/products/')
+          .then((response) => {
+              this.setState({
+                  product: response.data[0],
+                  displayedImageObj: response.data[0].photos[0]
+              })
+          })
+          .catch((err) => {
+              console.log(err);
+          })
     }
 
     render() {
