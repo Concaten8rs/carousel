@@ -1,10 +1,11 @@
-const nr = require('newrelic');
+// const nr = require('newrelic');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const morgan = require('morgan');
-const controller = require('./controllers/controller.js');
-const mongo = require('../database/database.js');
+const controller = require('./controllers/postgres-controller.js');
+// const mongo = require('../database/mongo-index.js'); // to connect to mongo database
+const pg = require('../database/postgres-index.js');
 const app = express();
 const port = 3000;
 
@@ -13,7 +14,7 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(morgan('tiny'));
 
-app.get('/api/products/', controller.getAllPhotos);
+app.get('/api/products/:id', controller.getPhotosByProduct);
 
 app.listen(port, (error) => {
   if (error) {

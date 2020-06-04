@@ -23,6 +23,7 @@ CREATE TABLE photos (
 ALTER TABLE photos
   ADD FOREIGN KEY(product_id) REFERENCES products(id);
 
+-- copy csv files into correct table
 COPY products (id, product_name, product_description, cost) FROM '/Users/serviolee/Documents/nextchapter/hrsf127-sdc/carousel/data-generator/productsData.csv' DELIMITER ',' CSV;
 
 COPY photos (id, product_id, photo_description, photo_order, photo_url, posting_date) FROM '/Users/serviolee/Documents/nextchapter/hrsf127-sdc/carousel/data-generator/photosData.csv' DELIMITER ',' CSV;
