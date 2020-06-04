@@ -16,6 +16,12 @@ app.use(morgan('tiny'));
 
 app.get('/api/products/:id', controller.getPhotosByProduct);
 
+app.post('api/products/:id/photos', controller.addPhoto);
+
+app.delete('/api/products/:id/photos/:photo_id', controller.deletePhoto);
+
+app.put('/api/products/:id/photos/:photo_id', controller.updatePhoto);
+
 app.listen(port, (error) => {
   if (error) {
     console.log(`error listening to port ${error}`);
