@@ -6,32 +6,29 @@ import ImageCarousel from "./imageCarousel.jsx";
 import Modal from "./modal.jsx";
 // import styles from "../style.module.css";
 
+let randomNum = Math.floor(Math.random() * 10000000);
+
 class CaroApp extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            product : {},
-            displayedImageObj : {}
-        };
-    }
-
-    stateUpdater(callback) {
-        axios.get("http://127.0.0.1:3000/caro/fetch")
-        .then(res => {
-            // console.log(res.data[0])
-            callback(null, res.data);
-        })
-        .catch(err => {callback(err)})
+            product : 'Cheapest Black T Shirt',
+            images: [],
+            displayedImage: ''
+        }
     }
 
     componentDidMount() {
-        this.stateUpdater((err, data) => {
-            if (err) throw "Error : " + err;
-            this.setState({
-                product : data[0],
-                displayedImageObj : data[0].photos[0]
-            })
-        })
+        axios.get(`/api/products/${randomNum}`)
+          .then((response) => {
+              this.setState({
+                  images: response.data,
+                  displayedImage: response.data[0].photo_url
+              })
+          })
+          .catch((err) => {
+              console.log(err);
+          })
     }
 
     render() {
@@ -39,9 +36,9 @@ class CaroApp extends React.Component {
         // console.log(styles.contents, "style!")
         return (
             <div className="react-app">
-                <Banner productName={this.state.product.product_name}/>
+                <Banner productName={this.state.product}/>
                 <div className="contents">
-                <ImageCarousel images={this.state.product.photos} displayedImage={this.state.displayedImageObj}/>
+                <ImageCarousel images={this.state.images} displayedImage={this.state.displayedImage}/>
                 <Configurations price={this.state.product.price} rating={this.state.product.rating} sizes={this.state.product.sizes}/>
                 <Modal />
                 </div>

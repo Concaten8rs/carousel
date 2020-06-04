@@ -66,8 +66,8 @@ const generatePhotos = () => {
       } else {
         ok = writer.write(createString(i), 'utf-8');
       }
-    } while (i > 0 && ok);
-    if (i > 0) {
+    } while (i > 1 && ok);
+    if (i > 1) {
       writer.once('drain', write);
     }
   }
@@ -75,7 +75,7 @@ const generatePhotos = () => {
 
 const generateProducts = () => {
   console.log('generateProducts');
-  let stream = fs.createWriteStream('data-generator/productsData.csv');
+  let stream = fs.createWriteStream('data-generator/photosData.csv');
 
   for (let i = 1; i < 10000001; i++) {
     stream.write(`${i},${faker.commerce.productName()},${faker.lorem.sentence()},${faker.commerce.price()}\n`)
