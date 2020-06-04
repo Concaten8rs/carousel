@@ -14,6 +14,42 @@ const getPhotosByProduct = (req, res) => {
   })
 }
 
+const addPhoto = (req, res) => {
+  db.addPhoto(req.params, (error, result) => {
+    if (error) {
+      console.log('server error adding photo ', error );
+      res.status(500);
+    } else {
+      res.sendStatus(201);
+    }
+  })
+}
+
+const deletePhoto = (req, res) => {
+  db.deletePhoto(req.params, (error, result) => {
+    if (error) {
+      console.log('server error deleting photo ', error);
+      res.status(500);
+    } else {
+      res.sendStatus(204);
+    }
+  })
+}
+
+const updatePhoto = (req, res) => {
+  db.updatePhoto(req.params, (error, result) => {
+    if (error) {
+      console.log('server error updating photo ', error);
+      res.status(500);
+    } else {
+      res.sendStatus(204);
+    }
+  })
+}
+
 module.exports = {
-  getPhotosByProduct
+  getPhotosByProduct,
+  addPhoto,
+  deletePhoto,
+  updatePhoto
 }

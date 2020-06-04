@@ -1,7 +1,9 @@
 const { Client } = require('pg');
-const conString = 'postgres://postgres:$postgrespassword@127.0.0.1/carousel';
+const connectionString = 'postgres://postgres:$postgrespassword@127.0.0.1/carousel';
 
-const db = new Client(conString);
+const db = new Client({
+  connectionString: connectionString
+});
 
 db.connect();
 
