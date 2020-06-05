@@ -1,4 +1,4 @@
-// const nr = require('newrelic');
+const nr = require('newrelic');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -16,7 +16,7 @@ app.use(morgan('tiny'));
 
 app.get('/api/products/:id', controller.getPhotosByProduct);
 
-app.post('api/products/:id/photos', controller.addPhoto);
+app.post('/api/products/:id/photos', controller.addPhoto);
 
 app.delete('/api/products/:id/photos/:photo_id', controller.deletePhoto);
 
