@@ -1,6 +1,5 @@
 node_modules
 client/dist/bundle.js
-client/dist/style.css
 todo.txt
 *.csv
 NEW_RELIC_KEY.js
