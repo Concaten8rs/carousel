@@ -1,17 +1,36 @@
 const db = require('../../database/controllers/postgres-controller.js');
+const redis = require('redis');
+
+const client = redis.createClient();
+
+client.on('connect', (err) => {
+  if (err) {
+    console.log('redis error ', err);
+  } else {
+    console.log('connected to redis');
+  }
+})
 
 const getPhotosByProduct = (req, res) => {
-  // console.log('server => ', req.params);
+  console.log('server => ', req.params);
   // console.log('server ', db);
-  db.getPhotosByProduct(req.params, (error, result) => {
-    if (error) {
-      console.log('server error retrieving photos ', error);
-      res.status(500);
-    } else {
-      // console.log(result.rows);
+  client.get(req.params.id, (error, result) => {
+    if (result) {
       res.json(result.rows);
+    } else {
+      db.getPhotosByProduct(req.params, (error, result) => {
+        if (error) {
+          console.log('server error retrieving photos ', error);
+          res.status(500);
+        } else {
+          // console.log(result.rows);
+          client.set(req.params.id, JSON.stringify(result.rows));
+          res.json(result.rows);
+        }
+      })
     }
   })
+
 }
 
 const addPhoto = (req, res) => {

@@ -21,7 +21,10 @@
         "pg": "^8.2.1",
         "react": "16.13.1",
         "react-dom": "16.13.1",
-        "style-loader": "^1.2.1"
+        "redis": "^3.0.2",
+        "style-loader": "^1.2.1",
+        "wget": "0.0.1",
+        "wget-improved": "^3.2.0"
     },
     "devDependencies": {
         "@babel/core": "^7.9.6",
